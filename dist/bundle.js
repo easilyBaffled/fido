@@ -172,7 +172,7 @@ function submit_fetch( url, headers = {}, method = 'GET', body = {} ) {
             .then( parse_resp_JSON )
             .then( res => {
                 const transformedData = data_transformer( url, method, res );
-                return transformedData || res.data ? ( res.data.data ? res.data.data : res.data ) : res;
+                return transformedData ? transformedData : res;
             } );
 }
 
