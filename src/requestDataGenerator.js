@@ -14,7 +14,7 @@ export default function configure_data_gen( configuration ) {
      * @return {*|boolean} - An object replicating data from the API or false indicating that the URL wasn't a match
      */
     return ( url, method, metadata ) => {
-        const match = url.match( /https:\/\/[^/]*\/(.*)/ );
+        const match = url.match( /https?:\/\/[^/]*\/(.*)/ );
         const queryMatch = match ? match[ 1 ] : '';
 
         for ( const key in configuration ) {
