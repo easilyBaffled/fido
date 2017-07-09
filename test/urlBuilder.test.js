@@ -1,5 +1,4 @@
 import urlBuilder from '../src/urlBuilder';
-import { random } from 'faker';
 
 function getRandomIntInclusive( min, max ) {
     min = Math.ceil( min );
@@ -7,19 +6,9 @@ function getRandomIntInclusive( min, max ) {
     return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
 }
 
-const option1 = 'manifests';
-const option2 = 'members';
-
-const userIds = Array.from( { length: getRandomIntInclusive( 1, 5 ) }, () => random.uuid() );
-const groupId = random.uuid();
-
 urlBuilder.baseUrl = 'TEST';
-/*
-test( 'urlBuilder is a thing', () => {
-    // const classMat = urlBuilder.mat( option1, option2 );
 
-    // console.log( urlBuilder.debug( 2, 'group' ).groupId( groupId ).load( classMat ).buildUrl() );
-    // console.log( urlBuilder.owners( userIds ).where( { model: 'Groups', Aaron: 'satisfied' } ).skip().limit().mat( option1, option2 ).build_url() );
+test( 'urlBuilder is a thing', () => {
     expect( !!urlBuilder ).toBe( true );
 } );
 
@@ -43,7 +32,9 @@ testGroup( '_update', {
         const builder2 = builder1._update();
 
         expect( urlBuilder !== builder1 ).toBe( true );
-        expect( builder1 === builder2 ).toBe( true );
+        expect( builder1 === builder2 ).toBe( true )
+        expect( builder1.__isProxy ).toBe( true );
+        expect( builder2.__isProxy ).toBe( true );
         expect( builder2 !== urlBuilder ).toBe( true );
 
     },
@@ -84,7 +75,7 @@ testGroup( '_update', {
         expect( updatedBuilder.queries.includes( 'newValue' ) ).toBe( true );
     }
 } );
-*/
+
 testGroup( 'addParam', {
     'takes any single value, including null and adds it to the Builder ': () => {
         const paramedBuilder = urlBuilder.addParam( 1, 2, 3 );
@@ -125,6 +116,91 @@ testGroup( 'addQuery', {
 
     }
 } )
+
+testGroup( 'copy', {
+    'creates a new copy of the Builder': () => {
+        const firstBuilder = urlBuilder.addQuery( 'testKey', 'testValue' );
+        firstBuilder.addParam( 'testParam' );
+        const copyBuilder = firstBuilder.copy();
+
+        expect( copyBuilder ).not.toBe( firstBuilder );
+        expect( copyBuilder.params ).toEqual( firstBuilder.params );
+    }
+} )
+
+
+testGroup( 'buildUrl', {
+    'takes the parts of the Builder and builds a valid url': () => {
+        const url = urlBuilder
+            .addQuery( 'testKey', 'testValue' )
+            .addParam( 'testParam' )
+            .buildUrl();
+
+        expect( url ).toEqual( 'TEST/testParam?testKey=testValue' )
+    },
+    'will construct the url starting with the Builder\'s baseUrl': () => {
+        const builder = urlBuilder._update();
+        const url = builder.buildUrl();
+        expect( url ).toEqual( builder.baseUrl )
+    },
+    'will join all query entries with an &': () => {
+        const url = urlBuilder
+            .addQuery( 'testKey', 'testValue' )
+            .addQuery( 'testKey2', 'testValue2' )
+            .buildUrl();
+
+        expect( url.includes( '&' ) ).toBe( true );
+    },
+    'will join all paramter entries with a /': () => {
+        const url = urlBuilder
+            .addParam( 'testParam' )
+            .addParam( 'testParam2' )
+            .buildUrl();
+
+        expect( url.includes( '/' ) ).toBe( true );
+    }
+} );
+
+testGroup( 'proxyGet', {
+    'by default, if you call a function that does not exist on the Builder it will be treated like `addQuery`': () => {
+        const queryBuilder = urlBuilder.mat( 'key', 'value' ).where( 'key2', 'value2' )
+
+        queryBuilder.test( 'key3', 'key3' );
+        expect( queryBuilder.queries ).toEqual( ["mat=key,value", "where=key2,value2", "test=key3,key3"] )
+    },
+    'will ignore these extra functions if _strict is set to true ': () => {
+        urlBuilder._strict = true;
+        let queryBuilder;
+        try {
+            queryBuilder = urlBuilder.mat( 'key', 'value' );
+        } catch ( e ) {
+            expect( queryBuilder ).toBeUndefined();
+            expect( e ).toBeInstanceOf( Error );
+        }
+    }
+} );
+
+/*
+testGroup( 'load', {
+    'Add values of one builder to another': () => {
+        const queryBuilder = urlBuilder.addQuery( 'key', 'value' );
+        const paramBuilder = urlBuilder.addParam( 'param' );
+
+        expect( paramBuilder.queries.length ).toBe( 0 );
+        paramBuilder.load( true, queryBuilder );
+        expect( paramBuilder.queries ).toEqual( [ 'key=value' ] );
+    },
+    'will merge, not overwrite the values': () => {
+        const queryBuilder = urlBuilder.addQuery( 'key', 'value' );
+        const paramBuilder = urlBuilder.addQuery( 'param' ).addQuery( 'key2', 'value2' );
+
+        expect( paramBuilder.queries ).toEqual( [ 'key2=value2' ] );
+        paramBuilder.load( true, queryBuilder );
+        expect( paramBuilder.queries ).toEqual( [ 'key2=value2', 'key=value' ] );
+        expect( paramBuilder.params ).toEqual( [ 'param' ] );
+    }
+} );
+*/
 
 /**
  * An adapter for Jest's `test` function so it can easily slot in with Object.entries

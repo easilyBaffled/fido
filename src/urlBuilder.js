@@ -12,6 +12,9 @@ export const __urlBuilder = {
         null,
         ( name, value ) => console.log( name, JSON.stringify( value, replacer ) )
     ],
+    toString: function () {
+        return 'toString'
+    },
     debug: function( level = 1, name = null ) {
         if ( name ) console.log( 'Debug: ' + name );
 
@@ -19,8 +22,9 @@ export const __urlBuilder = {
     },
     _update: function( type = '', value = null ) {
         let obj = this;
+
         if ( !obj._url ) {
-            obj = Object.assign( {}, this );
+            obj = new Proxy( Object.assign( {}, this ), { set: proxySet, get: proxyGet } );
             if ( obj.baseUrl === '' ) console.warn( 'No BaseUrl' );
             obj._url = obj.baseUrl;
             obj.params = [];
@@ -36,17 +40,17 @@ export const __urlBuilder = {
 
         return obj;
     },
-    addParam( value ) {
+    addParam: function( value ) {
         return this._update( 'params', value )
     },
-    addQuery( key, value ) {
+    addQuery: function( key, value ) {
         const query = ( key && typeof key === 'object' ) ?
                             Object.keys( key ).map( k => `${k}=${key[ k ]}` ).join( '&' ) // If key is an object value is ignored
                             : `${key}=${value}`;
         return this._update( 'queries', query );
     },
     copy: function() {
-        return Object.create( this );
+        return new Proxy( Object.assign( {}, this ), { set: proxySet, get: proxyGet } )
     },
     buildUrl: function() {
         const
@@ -55,10 +59,7 @@ export const __urlBuilder = {
 
         return this.baseUrl + paramString + queryString;
     },
-    get url() {
-        return this.buildUrl();
-    },
-    load: function( extendProp, ...props ) {
+    /*load: function( extendProp, ...props ) {
         const extend = typeof props[ 0 ] === 'boolean' ? props.splice( 0, 1 ) : false;
 
         props.forEach( propSet => { // TEST IF IT"S NOT AN OBJECT
@@ -83,7 +84,7 @@ export const __urlBuilder = {
         } );
 
         return this._update();
-    }
+    }*/
 };
 
 function proxySet( target, property, value ) {
@@ -95,14 +96,15 @@ function proxySet( target, property, value ) {
     return true;
 }
 
-function proxyGet ( target, name ) {
-    const value = target[ name ];
+function proxyGet ( target, name, proxy ) {
+    if (name === "__isProxy") return true;
 
+    const value = target[ name ];
     if ( value !== undefined || target._strict ) return value;
 
     return function( ...options ) {
         console.warn( `${name} is not a function on this Builder, but it will be treated as 'addQuery( ${name}, ${options} )'. If you do not want this safety net and short cut, set 'strict' to 'true' on this Builder, or import __urlBuilder.` );
-        return target.addQuery( name, options );
+        return proxy.addQuery( name, options );
     };
 }
 const urlBuilder = new Proxy( __urlBuilder, { set: proxySet, get: proxyGet } );
