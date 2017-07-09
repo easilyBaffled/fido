@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("bluebird"), require("node-fetch"), require("path-to-regexp"), require("whatwg-fetch"));
+		module.exports = factory(require("node-fetch"), require("bluebird"), require("whatwg-fetch"), require("path-to-regexp"));
 	else if(typeof define === 'function' && define.amd)
-		define(["bluebird", "node-fetch", "path-to-regexp", "whatwg-fetch"], factory);
+		define(["node-fetch", "bluebird", "whatwg-fetch", "path-to-regexp"], factory);
 	else if(typeof exports === 'object')
-		exports["fetchUtil"] = factory(require("bluebird"), require("node-fetch"), require("path-to-regexp"), require("whatwg-fetch"));
+		exports["fetchUtil"] = factory(require("node-fetch"), require("bluebird"), require("whatwg-fetch"), require("path-to-regexp"));
 	else
-		root["fetchUtil"] = factory(root["bluebird"], root["node-fetch"], root["path-to-regexp"], root["whatwg-fetch"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_6__, __WEBPACK_EXTERNAL_MODULE_7__, __WEBPACK_EXTERNAL_MODULE_8__) {
+		root["fetchUtil"] = factory(root["node-fetch"], root["bluebird"], root["whatwg-fetch"], root["path-to-regexp"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_3__, __WEBPACK_EXTERNAL_MODULE_4__, __WEBPACK_EXTERNAL_MODULE_5__, __WEBPACK_EXTERNAL_MODULE_7__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -43,9 +43,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -73,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -81,25 +78,25 @@ return /******/ (function(modules) { // webpackBootstrap
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["e"] = extend_fetch_headers;
-/* harmony export (immutable) */ __webpack_exports__["b"] = add_dummy_data_config;
-/* harmony export (immutable) */ __webpack_exports__["c"] = add_transform_config;
+/* harmony export (immutable) */ __webpack_exports__["c"] = extend_fetch_headers;
+/* harmony export (immutable) */ __webpack_exports__["a"] = add_dummy_data_config;
+/* harmony export (immutable) */ __webpack_exports__["b"] = add_transform_config;
 /* harmony export (immutable) */ __webpack_exports__["d"] = set_base_url;
-/* harmony export (immutable) */ __webpack_exports__["a"] = submit_fetch;
+/* harmony export (immutable) */ __webpack_exports__["e"] = submit_fetch;
 /* unused harmony export get_json */
 /* unused harmony export post */
 /* unused harmony export put */
 /* unused harmony export default */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__requestDataGenerator__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__requestDataGenerator__ = __webpack_require__(6);
 let fetch;
 
 
 if ( typeof window === 'undefined' ) {
-    fetch = __webpack_require__( 6 );
+    fetch = __webpack_require__( 3 );
     fetch.Promise = __webpack_require__( 1 );
 } else {
     if ( !window.fetch ) {
-        __webpack_require__( 8 );
+        __webpack_require__( 5 );
         window.fetch.Promise = __webpack_require__( 1 );
     }
     fetch = window.fetch;
@@ -125,11 +122,11 @@ function extend_fetch_headers( extensions ) {
 }
 
 function add_dummy_data_config( config ) {
-    generate_dummy_data = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__requestDataGenerator__["a" /* default */])( config );
+    generate_dummy_data = __WEBPACK_IMPORTED_MODULE_0__requestDataGenerator__["a" /* default */]( config );
 }
 
 function add_transform_config( config ) {
-    data_transformer = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__requestDataGenerator__["a" /* default */])( config );
+    data_transformer = __WEBPACK_IMPORTED_MODULE_0__requestDataGenerator__["a" /* default */]( config );
 }
 
 function set_base_url( url ) {
@@ -247,7 +244,7 @@ function fetch_config( url, headers ) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bluebird__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bluebird__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_bluebird___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_bluebird__);
 
 
@@ -264,19 +261,360 @@ __WEBPACK_IMPORTED_MODULE_0_bluebird___default.a.config( {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export truncate */
-/* unused harmony export replacer */
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchUtil__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__requestBuilder__ = __webpack_require__(8);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "submit_fetch", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["e"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "add_dummy_data_config", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "add_transform_config", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["b"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "set_base_url", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["d"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "extend_fetch_headers", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["c"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ReqBuilder", function() { return __WEBPACK_IMPORTED_MODULE_1__requestBuilder__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "urlBuilder", function() { return __WEBPACK_IMPORTED_MODULE_1__requestBuilder__["urlBuilder"]; });
+
+
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_4__;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = configure_data_gen;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
 
 
 /**
+ * Creates a function that uses a js object configuration to match against given URLs
+ * @param {object} configuration - an object with a key -> value pairing of express-like parameterized routes -> dummy data generator
+ * @return {function(*)} - function to be used for matching URLs with the proper dummy data
+ */
+function configure_data_gen( configuration ) {
+    /**
+     * Match the given URL against express-like parameterized routesand returns dummy data to replicate data that may come from the API
+     * @param {string} url - url used to request data from the API
+     * @param {string} method - The CRUD verb associated with the request
+     * @param {object} metadata - user incldued things like authCode
+     * @return {*|boolean} - An object replicating data from the API or false indicating that the URL wasn't a match
+     */
+    return ( url, method, metadata ) => {
+        const match = url.match( /https?:\/\/[^/]*\/(.*)/ );
+        const queryMatch = match ? match[ 1 ] : '';
+
+        for ( const key in configuration ) {
+            if ( typeof key === 'string' ) {
+                const regex = __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default.a( key );
+                const query  = queryMatch.match( regex );
+                if ( queryMatch.match( regex ) ) {
+                    return configuration[ key ]( ...query, metadata );
+                }
+            } else {
+                const [ verb, path ] = key;
+                const regex = __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default.a( path );
+                const query  = queryMatch.match( regex );
+                if ( queryMatch.match( regex ) && method === verb ) {
+                    return configuration[ key ]( ...query, metadata );
+                }
+            }
+
+
+        }
+        return false;
+    };
+}
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
+
+/***/ }),
+/* 8 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchUtil__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__urlBuilder__ = __webpack_require__(9);
+
+
+
+/* harmony default export */ __webpack_exports__["a"] = (Object.assign( __WEBPACK_IMPORTED_MODULE_1__urlBuilder__["a" /* default */], {
+    method: 'GET',
+    header: {},
+    body: null,
+    _testing: false,
+    /**
+     * Replace the header with a new object;
+     * @param {object} newheader - header for the request
+     * @return {ReqBuilder} - returns RequestBuilder
+     */
+    setHeader: function( newheader = {} ) {
+        if ( typeof newheader !== 'object' || newheader.length ) throw new Error( `Header ${newheader} is not an object` )
+        return this._update( 'header', newheader );
+    },
+    /**
+     * Add data to the request header. Does not overwrite the header.
+     * If the first parameter is an object, that object will be spread into the header object, the second parameter will be ignored.
+     * @param {string|object} key - key or object to be added to header
+     * @param {*} value - value to be added to header
+     * @return {ReqBuilder} - returns RequestBuilder
+     */
+    updateHeader: function( key, value ) {
+        const header = typeof key === 'object' ?
+            Object.assign( this.header, key )
+            : Object.assign( this.header, { [ key ]: value } );
+
+        return this._update( 'header', header );
+    },
+    /**
+     * Replace the body with a new object;
+     * @param {object} newBody - body for the request
+     * @return {ReqBuilder} - returns RequestBuilder
+     */
+    setBody: function( newBody = {} ) {
+        return this._update( 'body', newBody );
+    },
+    /**
+     * Add data to the request body. Does not overwrite the body.
+     * If the first parameter is an object, that object will be spread into the body object, the second parameter will be ignored.
+     * @param {string|object} key - key or object to be added to body
+     * @param {*} value - value to be added to body
+     * @return {ReqBuilder} - returns RequestBuilder
+     */
+    updateBody: function( key, value ) {
+        const existingBody = this.body || {}
+        const body = typeof key === 'object' ?
+            Object.assign( existingBody, key )
+            : Object.assign( existingBody, { [ key ]: value } );
+
+        return this._update( 'body', body );
+    },
+    /**
+     * Set the method/verb for the request and make the request
+     * @param {string} method - verb/method you want to use
+     * @return {ReqBuilder} - returns RequestBuilder
+     */
+    verb: function( method ) {
+        this._update( 'method', method );
+        return this.send();
+    },
+    /**
+     * Make a GET request
+     * @return {ReqBuilder} - returns RequestBuilder
+     */    get: function() {
+        return this.verb( 'GET' );
+    },
+    /**
+     * Make a PUT request
+     * @return {ReqBuilder} - returns RequestBuilder
+     */
+    put: function() {
+        return this.verb( 'PUT' );
+    },
+    /**
+     * Make a POST request
+     * @return {ReqBuilder} - returns RequestBuilder
+     */
+    post: function() {
+        return this.verb( 'POST' );
+    },
+    /**
+     * Make a DELETE request
+     * @return {ReqBuilder} - returns RequestBuilder
+     */
+    delete: function() {
+        return this.verb( 'DELETE' );
+    },
+
+    /**
+     * Get all parts of the request as an object
+     * @return {{url: string, header: object, method: string, body: object}} - Request as an object
+     */
+    getRequestObj: function() {
+        return {
+            url: this.buildUrl(),
+            header: this.header,
+            method: this.method,
+            body: this.body
+        };
+    },
+    /**
+     * Builds the request URL and submits the request
+     * @param {boolean} testing - debug flag, defaults to false
+     * @return {Promise.<string>} - result of fetch
+     */
+    send: function( testing = false ) { // Can I, should I clear data
+        const { url, header, method, body } = this.getRequestObj();
+
+        if ( this._debug ) console.log( { url, header, method, body } );
+        if ( this._testing ) {
+            return Promise.resolve( { _id: 'testing' } );
+        } else {
+            return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["e" /* submit_fetch */]( url, header, method, body  );
+        }
+    }
+} ));
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__utils__ = __webpack_require__(10);
+
+
+const __urlBuilder = {
+    _baseUrl: null,
+    _url: null,
+    _strict: false,
+    _debugLevel: 0,
+    params: [],
+    queries: [],
+    _logLevels: [
+        null,
+        null,
+        ( name, value ) => console.log( name, JSON.stringify( value, __WEBPACK_IMPORTED_MODULE_0__utils__["b" /* replacer */] ) )
+    ],
+    debug: function( level = 1, name = null ) {
+        if ( name ) console.log( 'Debug: ' + name );
+
+        return this._update( '_debugLevel', level );
+    },
+    _update: function( type = '', value = null ) {
+        let obj = this;
+
+        if ( !obj._url ) {
+            obj = new Proxy( Object.assign( {}, this ), { set: proxySet, get: proxyGet } );
+            if ( obj.baseUrl === '' ) console.warn( 'No BaseUrl' );
+            obj._url = obj.baseUrl;
+            obj.params = [];
+            obj.queries = [];
+        }
+
+        if ( type ) {
+            if ( !value ) console.warn( type + ' is empty. Did you mean for that? The value is still being added. If you want it to not be added in the future, set _strict to true' );
+            if ( type === 'params' ) __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* insert */]( obj.params, value );
+            else if ( type === 'queries' ) __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* insert */]( obj.queries, value );
+            else if ( !this._strict ) obj[ type ] = value;
+        }
+
+        return obj;
+    },
+    addParam: function( value ) {
+        return this._update( 'params', value )
+    },
+    addQuery: function( key, value ) {
+        const query = ( key && typeof key === 'object' ) ?
+                            Object.keys( key ).map( k => `${k}=${key[ k ]}` ).join( '&' ) // If key is an object value is ignored
+                            : `${key}=${value}`;
+        return this._update( 'queries', query );
+    },
+    copy: function() {
+        return new Proxy( Object.assign( {}, this ), { set: proxySet, get: proxyGet } )
+    },
+    buildUrl: function() {
+        const
+            paramString = this.params.length > 0 ? '/' + this.params.join( '/' ) : '',
+            queryString = this.queries.length > 0 ? '?' + this.queries.join( '&' ) : '';
+
+        return this.baseUrl + paramString + queryString;
+    },
+    /*load: function( extendProp, ...props ) {
+        const extend = typeof props[ 0 ] === 'boolean' ? props.splice( 0, 1 ) : false;
+
+        props.forEach( propSet => { // TEST IF IT"S NOT AN OBJECT
+            if ( typeof propSet !== 'object' || Array.isArray( propSet ) ) throw new Error( 'Load only takes Objects' );
+
+            Object.keys( propSet ).forEach( key => {
+                const newValue = propSet[ key ];
+                if ( newValue !== '' && newValue !== {} && newValue.length > 0 ) {
+                    if ( this[ key ] && extend ) {
+                        const propType = typeof this[ key ];
+                        if ( propType === 'string' || Array.isArray( propType ) ) {
+                            this[ key ] = this[ key ].concat( newValue );
+                        } else {
+                            this[ key ] = Object.assign( this[ key ], newValue );
+                        }
+                    } else {
+                        this[ key ] = newValue;
+                    }
+                }
+            } );
+
+        } );
+
+        return this._update();
+    }*/
+};
+/* unused harmony export __urlBuilder */
+
+
+function proxySet( target, property, value ) {
+    target[ property ] = value;
+    if ( property === 'params' || property === 'queries' ) {
+        const log = target._logLevels[ target._debugLevel ];
+        if ( log ) log( property, value )
+    }
+    return true;
+}
+
+function proxyGet ( target, name, proxy ) {
+    if (name === "__isProxy") return true;
+
+    const value = target[ name ];
+    if ( value !== undefined || target._strict ) return value;
+
+    return function( ...options ) {
+        console.warn( `${name} is not a function on this Builder, but it will be treated as 'addQuery( ${name}, ${options} )'. If you do not want this safety net and short cut, set 'strict' to 'true' on this Builder, or import __urlBuilder.` );
+        return proxy.addQuery( name, options );
+    };
+}
+const urlBuilder = new Proxy( __urlBuilder, { set: proxySet, get: proxyGet } );
+/* harmony default export */ __webpack_exports__["a"] = (urlBuilder);
+
+/***/ }),
+/* 10 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* unused harmony export truncate */
+/* harmony export (immutable) */ __webpack_exports__["b"] = replacer;
+/* unused harmony export genericArray */
+/* unused harmony export push */
+/* harmony export (immutable) */ __webpack_exports__["a"] = insert;
+/**
  * Truncates a string longer than 10 characters to the first 8 characters followed by ..
  * @param {string} str - long string
+ * * @param {boolean} ingnoreSpaces -
  * @return {string} - truncated string
  */
-function truncate( str ) {
+function truncate( str, ingnoreSpaces = true ) {
     if ( !str ) return '';
-    return str.length > 10 ? str.substring( 0, 8 ) + '...' : str;
+    if ( ingnoreSpaces ) return str.length > 10 ? str.substring( 0, 8 ) + '...' : str;
+    return str.split( ' ' ).map( str => str.length > 10 ? str.substring( 0, 8 ) + '...' : str ).join();
 }
 
 /**
@@ -307,410 +645,59 @@ function replacer( key, value = null ) {
     return value;
 }
 
-const urlBuilder = {
-    _url: null,
-    _strict: false,
-    _baseUrl: '',
-    params: [], // Would a TypedArray be valuable?
-    queries: [],
-    _debug: false,
-    _debugLevel: '',
-    debug_log: function( name, value ) {
-        if ( this._debug )  {
-            if ( !this._debugLevel || this._debugLevel === 'all' ) {
-                console.log( name, JSON.stringify( value, replacer ) );
-            }
-        }
-    },
-    /**
-     * A catch all setter for the urlBuilder that can handle the debug logging for all other calls
-     * @param {string} name - key name for entry on this object
-     * @param {string} value - value for entry on this object
-     * @param {string|object} debugValue - a special value to be used in debugging
-     * @return {ReqBuilder} - This ReqBuilder object
-     */
-    setter: function( name, value, debugValue = null ) {
-        this[ name ] = value;
+/**
+ *
+ * @param length
+ * @param fill
+ */
+function genericArray( length, fill = '' ) {
+    let filFunc = fill;
+    if ( typeof filFunc !== 'function' ) filFunc = () => fill;
 
-        this.debug_log( name, debugValue || value );
-        return this._build_req();
-    },
-    /**
-     * Optionally set boolean flag. Defaults to true when you call it.
-     * But allows you to specify incase you want to `debug( process.env.NODE_ENV === 'production' )`
-     * @param {boolean|object} dbg - debug flag, defaults to true
-     * @return {ReqBuilder} - This ReqBuilder object
-     */
-    debug: function( dbg = true ) {
-        if ( typeof dbg === 'object' ) {
-            if ( !dbg.name || !dbg.level ) console.warn( 'Debug object is missing name or level. Default values `Debug` and `all` will be used' );
-            this._debug = dbg.name || 'Debug';
-            this._debugLevel = dbg.level || 'all';
-            console.log( this._debug.toUpperCase() ); // console.group <-- how do we know when to call console.groupEnd
-            return this._build_req( '_debug', dbg.name )._build_req( '_debugLevel', dbg.level );
-        } else {
-            this._debug = dbg;
-            return this._build_req( '_debug', dbg );
-        }
-    },
-    /**
-     * Adds the given value to a specified array.
-     * Handles creating a new object if necessary
-     * @param {string} type - what array to add the values to
-     * @param {*} value - Value to be added to arrays
-     * @return {ReqBuilder} - This ReqBuilder object
-     * @private
-     */
-    _build_req: function( type = '', value = null ) {
-        let obj = this;
-        if ( !obj.url ) {
-            obj = Object.create( this );
-            if ( obj.baseUrl === '' ) console.warn( 'No BaseUrl' );
-            obj.url = obj.baseUrl;
-            obj.params = [];
-            obj.queries = [];
-        }
+    return Array.from( { length }, filFunc );
+}
 
-        if ( type ) {
-            if ( !value ) console.warn( type + ' is empty. Did you mean for that? The value is still being added. If you want it to not be added in the future, set _strict to true' );
-            if ( type === 'params' ) obj.setter( type, obj.params.concat( value ), value );
-            else if ( type === 'queries' ) obj.setter( type, [ ...obj.queries, value ], value );
-            else obj[ type ] = value;
-        }
+/**
+ *
+ * @param arr
+ * @param item
+ * @return {*}
+ */
+function push( arr, item ) {
+    arr.push( item );
+    return arr;
+}
 
-        return obj;
-    },
-    /**
-     * Add a paramter to the request.
-     * This does not add it to the URL right away.
-     * Instead it adds it an array that will be used in the building later.
-     * @param {string} value - paramter
-     * @return {ReqBuilder} - This ReqBuilder object
-     */
-    add_params: function( value ) {
-        return this._build_req( 'params', value );
-    },
-    /**
-     * Add a query to the request.
-     * This does not add it to the URL right away.
-     * Instead it adds it an array that will be used in the building later.
-     * @param {string|object} key - left side name, can be an object that will be turned into `k=v` queries
-     * @param {string} value - right side values
-     * @return {ReqBuilder} - This ReqBuilder object
-     */
-    add_query: function( key, value ) {
-        const query = ( key && typeof key === 'object' ) ? Object.keys( key ).map( ( k ) => `${key}=${key[k]}` ).join( '&' ) : `${key}=${value}`;
-        return this._build_req( 'queries', query );
-    },
-    /**
-     * Add add a skip to the request
-     * @param {number|string} amount - amount of items to skip
-     * @return {ReqBuilder} - This ReqBuilder object
-     */
-    skip: function( amount = 15 ) {
-        return this.add_query( 'skip', amount );
-    },
-    /**
-     * Add add a limit to the request
-     * @param {number|string} amount - amount of items to return
-     * @return {ReqBuilder} - This ReqBuilder object
-     */
-    limit: function( amount = 15 ) {
-        return this.add_query( 'limit', amount );
-    },
-    /**
-     * Makes a new independent copy of the current ReqBuilder
-     * @return {ReqBuilder} - This ReqBuilder object
-     */
-    copy: function() {
-        return Object.create( this );
-    },
-    /**
-     * Construct the URL from the params and queries
-     * @return {string} - the URL
-     */
-    build_url: function() {
-        const
-            paramString = this.params.length > 0 ? '/' + this.params.join( '/' ) : '',
-            queryString = this.queries.length > 0 ? '?' + this.queries.join( '&' ) : '';
-
-        return this.baseUrl + paramString + queryString;
-    },
-    /**
-     * Get the current URL
-     * The url does not get constructed unless told to accessing this.url will not get you anything
-     * @return {string} - the constructed URL
-     */
-    get_url: function() {
-        return this.build_url();
-    },
-    /**
-     * Set the Request URL, does not overwrite the params or queries
-     * @param {string} url - new request url
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    set_url: function( url ) {
-        this.url = url;
-        return this;
-    },
-    /**
-     * Loads all properties of the given object into this Builder.
-     * This will overwrite any existing property values with the new values
-     * @param {boolean|object} extendProp - Either the first object in the props list
-     * or a boolean flag to extend the current Builders properties instead of overwriting them
-     * @param {array} props - A list of saved object properties to load into this Builder
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    load: function( extendProp, ...props ) {
-        let extend = false;
-        if ( typeof extendProp === 'object' ) props.unshift( extendProp );
-        else extend = extendProp;
-
-        props.forEach( propSet => { // TEST IF IT"S NOT AN OBJECT
-            if ( typeof propSet !== 'object' || Array.isArray( propSet ) ) throw new Error( 'Load only takes Objects' );
-
-            Object.keys( propSet ).forEach( key => {
-                const newValue = propSet[ key ];
-                if ( newValue !== '' && newValue !== {} && newValue.length > 0 ) {
-                    if ( this[ key ] && extend ) {
-                        const propType = typeof this[ key ];
-                        if ( propType === 'string' || Array.isArray( propType ) ) {
-                            this[ key ] = this[ key ].concat( newValue );
-                        } else {
-                            this[ key ] = Object.assign( this[ key ], newValue );
-                        }
-                    } else {
-                        this[ key ] = newValue;
-                    }
-                }
-            } );
-
-        } );
-
-        return this._build_req();
-    }
-};
-/* harmony export (immutable) */ __webpack_exports__["b"] = urlBuilder;
-
-
-/* harmony default export */ __webpack_exports__["a"] = (Object.assign( urlBuilder, {
-    method: 'GET',
-    header: {},
-    body: null,
-    /**
-     * Replace the header with a new object;
-     * @param {object} newheader - header for the request
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    set_header: function( newheader = {} ) {
-        return this.setter( 'header', newheader );
-    },
-    /**
-     * Add data to the request header. Does not overwrite the header.
-     * If the first parameter is an object, that object will be spread into the header object, the second parameter will be ignored.
-     * @param {string|object} key - key or object to be added to header
-     * @param {*} value - value to be added to header
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    add_to_header: function( key, value ) {
-        if ( typeof key === 'object' ) {
-            this.header = Object.assign( this.header, key ) // { ...this.header, ...key };
-            this.debug_log( 'header', key );
-        }
-        else {
-            this.header[ key ] = value;
-            this.debug_log( 'header.' + key, value );
-        }
-
-        return this._build_req();
-    },
-    /**
-     * Replace the body with a new object;
-     * @param {object} newBody - body for the request
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    set_body: function( newBody = {} ) {
-        return this.setter( 'body', newBody );
-    },
-    /**
-     * Add data to the request body. Does not overwrite the body.
-     * If the first parameter is an object, that object will be spread into the body object, the second parameter will be ignored.
-     * @param {string|object} key - key or object to be added to body
-     * @param {*} value - value to be added to body
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    add_to_body: function( key, value ) {
-        if ( typeof key === 'object' ) {
-            this.body = Object.assign( this.body, key ) // { ...this.body, ...key };
-            this.debug_log( 'body', key );
-        }
-        else {
-            this.body[ key ] = value;
-            this.debug_log( 'body.' + key, value );
-        }
-
-        return this._build_req();
-    },
-    /**
-     * Make a GET request
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    get: function() {
-        return this.verb( 'GET' );
-    },
-    /**
-     * Make a PUT request
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    put: function() {
-        return this.verb( 'PUT' );
-    },
-    /**
-     * Make a POST request
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    post: function() {
-        return this.verb( 'POST' );
-    },
-    /**
-     * Make a DELETE request
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    delete: function() {
-        return this.verb( 'DELETE' );
-    },
-    /**
-     * Set the method/verb for the request and make the request
-     * @param {string} method - verb/method you want to use
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    verb: function( method ) {
-        this.setter( 'method', method );
-        return this.send();
-    },
-    /**
-     * Get all parts of the request as an object
-     * @return {{url: string, header: object, method: string, body: object}} - Request as an object
-     */
-    get_request_obj: function() {
-        return {
-            url: this.build_url(),
-            header: this.header,
-            method: this.method,
-            body: this.body
-        };
-    },
-    /**
-     * Builds the request URL and submits the request
-     * @param {boolean} testing - debug flag, defaults to false
-     * @return {Promise.<string>} - result of fetch
-     */
-    send: function( testing = false ) { // Can I, should I clear data
-        const { url, header, method, body } = this.get_request_obj();
-
-        if ( this._debug || testing ) console.log( { url, header, method, body } );
-        if ( testing ) {
-            return Promise.resolve( { _id: 'testing' } );
-        } else {
-            return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__fetchUtil__["a" /* submit_fetch */])( url, header, method, body  );
-        }
-    }
-} ));
-
-
-/***/ }),
-/* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__fetchUtil__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__requestBuilder__ = __webpack_require__(2);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "submit_fetch", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "add_dummy_data_config", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["b"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "add_transform_config", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["c"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "set_base_url", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["d"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "extend_fetch_headers", function() { return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["e"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "ReqBuilder", function() { return __WEBPACK_IMPORTED_MODULE_1__requestBuilder__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "urlBuilder", function() { return __WEBPACK_IMPORTED_MODULE_1__requestBuilder__["b"]; });
-
-
-
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = configure_data_gen;
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
+const PH = '__placeholder';
+/* unused harmony export PH */
 
 
 /**
- * Creates a function that uses a js object configuration to match against given URLs
- * @param {object} configuration - an object with a key -> value pairing of express-like parameterized routes -> dummy data generator
- * @return {function(*)} - function to be used for matching URLs with the proper dummy data
+ *
+ * @param arr
+ * @param item
+ * @param index
+ * @return {*}
  */
-function configure_data_gen( configuration ) {
-    /**
-     * Match the given URL against express-like parameterized routesand returns dummy data to replicate data that may come from the API
-     * @param {string} url - url used to request data from the API
-     * @param {string} method - The CRUD verb associated with the request
-     * @param {object} metadata - user incldued things like authCode
-     * @return {*|boolean} - An object replicating data from the API or false indicating that the URL wasn't a match
-     */
-    return ( url, method, metadata ) => {
-        const match = url.match( /https?:\/\/[^/]*\/(.*)/ );
-        const queryMatch = match ? match[ 1 ] : '';
+function insert( arr, item, index ) {
+    arr = arr.concat( [] );
+    if ( !index && index !== 0 ) return push( arr, item );
 
-        for ( const key in configuration ) {
-            if ( typeof key === 'string' ) {
-                const regex = __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default()( key );
-                const query  = queryMatch.match( regex );
-                if ( queryMatch.match( regex ) ) {
-                    return configuration[ key ]( ...query, metadata );
-                }
-            } else {
-                const [ verb, path ] = key;
-                const regex = __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default()( path );
-                const query  = queryMatch.match( regex );
-                if ( queryMatch.match( regex ) && method === verb ) {
-                    return configuration[ key ]( ...query, metadata );
-                }
-            }
+    const sizeDifference = index - arr.length;
 
+    if ( sizeDifference > 0 ) {
+        const spacerArray = genericArray( sizeDifference, PH );
+        const spacedArr = arr.concat( spacerArray );
+        const valuedArr = push( spacedArr, item );
+        return valuedArr;
+    }
 
-        }
-        return false;
-    };
+    arr.splice( index, +( arr[ index ] === PH ), item ); // urary plus converts a boolean to a 1 or 0. In this case if the thing at the index is a placeholder then replace it.
+
+    return arr;
 }
 
 
-/***/ }),
-/* 5 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_5__;
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_6__;
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports) {
-
-module.exports = __WEBPACK_EXTERNAL_MODULE_8__;
 
 /***/ })
 /******/ ]);
