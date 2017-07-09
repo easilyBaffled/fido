@@ -12,9 +12,6 @@ export const __urlBuilder = {
         null,
         ( name, value ) => console.log( name, JSON.stringify( value, replacer ) )
     ],
-    toString: function () {
-        return 'toString'
-    },
     debug: function( level = 1, name = null ) {
         if ( name ) console.log( 'Debug: ' + name );
 

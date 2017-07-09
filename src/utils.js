@@ -43,9 +43,11 @@ export function replacer( key, value = null ) {
  * @param length
  * @param fill
  */
-function genericArray( length, fill = '' ) {
-    if ( typeof fill !== 'function' ) fill = () => fill;
-    return Array.from( { length }, fill );
+export function genericArray( length, fill = '' ) {
+    let filFunc = fill;
+    if ( typeof filFunc !== 'function' ) filFunc = () => fill;
+
+    return Array.from( { length }, filFunc );
 }
 
 /**
@@ -69,14 +71,16 @@ export const PH = '__placeholder';
  * @return {*}
  */
 export function insert( arr, item, index ) {
-    if ( !index ) return push( arr, item );
+    arr = arr.concat( [] );
+    if ( !index && index !== 0 ) return push( arr, item );
 
-    const sizeDifference = index - arr.length - 1;
+    const sizeDifference = index - arr.length;
 
     if ( sizeDifference > 0 ) {
         const spacerArray = genericArray( sizeDifference, PH );
-        arr.concat( spacerArray );
-        return push( arr, item )
+        const spacedArr = arr.concat( spacerArray );
+        const valuedArr = push( spacedArr, item );
+        return valuedArr;
     }
 
     arr.splice( index, +( arr[ index ] === PH ), item ); // urary plus converts a boolean to a 1 or 0. In this case if the thing at the index is a placeholder then replace it.

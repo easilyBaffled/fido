@@ -1,10 +1,5 @@
 import urlBuilder from '../src/urlBuilder';
-
-function getRandomIntInclusive( min, max ) {
-    min = Math.ceil( min );
-    max = Math.floor( max );
-    return Math.floor( Math.random() * ( max - min + 1 ) ) + min;
-}
+import { testGroup, entriesTest, getRandomIntInclusive } from './testUtil';
 
 urlBuilder.baseUrl = 'TEST';
 
@@ -201,25 +196,5 @@ testGroup( 'load', {
     }
 } );
 */
-
-/**
- * An adapter for Jest's `test` function so it can easily slot in with Object.entries
- * @param {string} description - description text for this test
- * @param {function} func - a function to evaluate a given situation
- */
-function entriesTest( [ description, func ] ) {
-    test( description, func );
-}
-
-/**
- * A short cut for Jest's describe and test just to save some repetitive characters
- * @param {string} topic - description text for this group of tests
- * @param {object} tests - configured Jest tests where each entry's key:value is description string:test code
- */
-function testGroup( topic, tests ) {
-    describe( topic, () => {
-        Object.entries( tests ).forEach( entriesTest );
-    } )
-}
 
 // EASY TO DELETE

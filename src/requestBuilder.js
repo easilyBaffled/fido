@@ -5,13 +5,15 @@ export default Object.assign( urlBuilder, {
     method: 'GET',
     header: {},
     body: null,
+    _testing: false,
     /**
      * Replace the header with a new object;
      * @param {object} newheader - header for the request
      * @return {ReqBuilder} - returns RequestBuilder
      */
-    set_header: function( newheader = {} ) {
-        return this.setter( 'header', newheader );
+    setHeader: function( newheader = {} ) {
+        if ( typeof newheader !== 'object' || newheader.length ) throw new Error( `Header ${newheader} is not an object` )
+        return this._update( 'header', newheader );
     },
     /**
      * Add data to the request header. Does not overwrite the header.
@@ -20,25 +22,20 @@ export default Object.assign( urlBuilder, {
      * @param {*} value - value to be added to header
      * @return {ReqBuilder} - returns RequestBuilder
      */
-    add_to_header: function( key, value ) {
-        if ( typeof key === 'object' ) {
-            this.header = Object.assign( this.header, key ) // { ...this.header, ...key };
-            this.debug_log( 'header', key );
-        }
-        else {
-            this.header[ key ] = value;
-            this.debug_log( 'header.' + key, value );
-        }
+    updateHeader: function( key, value ) {
+        const header = typeof key === 'object' ?
+            Object.assign( this.header, key )
+            : Object.assign( this.header, { [ key ]: value } );
 
-        return this._build_req();
+        return this._update( 'header', header );
     },
     /**
      * Replace the body with a new object;
      * @param {object} newBody - body for the request
      * @return {ReqBuilder} - returns RequestBuilder
      */
-    set_body: function( newBody = {} ) {
-        return this.setter( 'body', newBody );
+    setBody: function( newBody = {} ) {
+        return this._update( 'body', newBody );
     },
     /**
      * Add data to the request body. Does not overwrite the body.
@@ -47,23 +44,27 @@ export default Object.assign( urlBuilder, {
      * @param {*} value - value to be added to body
      * @return {ReqBuilder} - returns RequestBuilder
      */
-    add_to_body: function( key, value ) {
-        if ( typeof key === 'object' ) {
-            this.body = Object.assign( this.body, key ) // { ...this.body, ...key };
-            this.debug_log( 'body', key );
-        }
-        else {
-            this.body[ key ] = value;
-            this.debug_log( 'body.' + key, value );
-        }
+    updateBody: function( key, value ) {
+        const existingBody = this.body || {}
+        const body = typeof key === 'object' ?
+            Object.assign( existingBody, key )
+            : Object.assign( existingBody, { [ key ]: value } );
 
-        return this._build_req();
+        return this._update( 'body', body );
+    },
+    /**
+     * Set the method/verb for the request and make the request
+     * @param {string} method - verb/method you want to use
+     * @return {ReqBuilder} - returns RequestBuilder
+     */
+    verb: function( method ) {
+        this._update( 'method', method );
+        return this.send();
     },
     /**
      * Make a GET request
      * @return {ReqBuilder} - returns RequestBuilder
-     */
-    get: function() {
+     */    get: function() {
         return this.verb( 'GET' );
     },
     /**
@@ -87,22 +88,14 @@ export default Object.assign( urlBuilder, {
     delete: function() {
         return this.verb( 'DELETE' );
     },
-    /**
-     * Set the method/verb for the request and make the request
-     * @param {string} method - verb/method you want to use
-     * @return {ReqBuilder} - returns RequestBuilder
-     */
-    verb: function( method ) {
-        this.setter( 'method', method );
-        return this.send();
-    },
+
     /**
      * Get all parts of the request as an object
      * @return {{url: string, header: object, method: string, body: object}} - Request as an object
      */
-    get_request_obj: function() {
+    getRequestObj: function() {
         return {
-            url: this.build_url(),
+            url: this.buildUrl(),
             header: this.header,
             method: this.method,
             body: this.body
@@ -114,10 +107,10 @@ export default Object.assign( urlBuilder, {
      * @return {Promise.<string>} - result of fetch
      */
     send: function( testing = false ) { // Can I, should I clear data
-        const { url, header, method, body } = this.get_request_obj();
+        const { url, header, method, body } = this.getRequestObj();
 
-        if ( this._debug || testing ) console.log( { url, header, method, body } );
-        if ( testing ) {
+        if ( this._debug ) console.log( { url, header, method, body } );
+        if ( this._testing ) {
             return Promise.resolve( { _id: 'testing' } );
         } else {
             return submit_fetch( url, header, method, body  );
