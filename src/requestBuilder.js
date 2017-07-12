@@ -118,12 +118,12 @@ export default Object.assign( urlBuilder, {
     },
 
     then: function ( ...args ) {
-        if ( args.length === 2 ) {
-            const [ verb, callback ] = args;
-            return this[ verb ]().then( callback )
-        } else if ( args.length > 2 ) {
-            return new Error( 'Too many arguments in then ' )
+        let verb = 'get';
+
+        if ( args.length > 1 && typeof args[ 1 ] === 'string' ) {
+            verb = args.shift();
         }
-        return this.get().then( callback )
+        
+        return this[ verb ]().then( ...args )
     }
 } );
