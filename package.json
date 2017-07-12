@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack",
-    "deploy": "npm run build"
+    "deploy": "npm run build && git commit . -m Build && npm version patch && npm publish"
   },
   "author": "",
   "license": "ISC",
