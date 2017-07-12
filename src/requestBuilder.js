@@ -109,11 +109,21 @@ export default Object.assign( urlBuilder, {
     send: function( testing = false ) { // Can I, should I clear data
         const { url, header, method, body } = this.getRequestObj();
 
-        if ( this._debug ) console.log( { url, header, method, body } );
+        if ( this._debugLevel ) console.log( { url, header, method, body } );
         if ( this._testing ) {
             return Promise.resolve( { _id: 'testing' } );
         } else {
             return submit_fetch( url, header, method, body  );
         }
+    },
+
+    then: function ( ...args ) {
+        if ( args.length === 2 ) {
+            const [ verb, callback ] = args;
+            return this[ verb ]().then( callback )
+        } else if ( args.length > 2 ) {
+            return new Error( 'Too many arguments in then ' )
+        }
+        return this.get().then( callback )
     }
 } );
