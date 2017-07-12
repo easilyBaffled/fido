@@ -468,12 +468,22 @@ module.exports = __WEBPACK_EXTERNAL_MODULE_7__;
     send: function( testing = false ) { // Can I, should I clear data
         const { url, header, method, body } = this.getRequestObj();
 
-        if ( this._debug ) console.log( { url, header, method, body } );
+        if ( this._debugLevel ) console.log( { url, header, method, body } );
         if ( this._testing ) {
             return Promise.resolve( { _id: 'testing' } );
         } else {
             return __WEBPACK_IMPORTED_MODULE_0__fetchUtil__["e" /* submit_fetch */]( url, header, method, body  );
         }
+    },
+
+    then: function ( ...args ) {
+        if ( args.length === 2 ) {
+            const [ verb, callback ] = args;
+            return this[ verb ]().then( callback )
+        } else if ( args.length > 2 ) {
+            return new Error( 'Too many arguments in then ' )
+        }
+        return this.get().then( callback )
     }
 } ));
 
@@ -516,8 +526,8 @@ const __urlBuilder = {
 
         if ( type ) {
             if ( !value ) console.warn( type + ' is empty. Did you mean for that? The value is still being added. If you want it to not be added in the future, set _strict to true' );
-            if ( type === 'params' ) __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* insert */]( obj.params, value );
-            else if ( type === 'queries' ) __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* insert */]( obj.queries, value );
+            if ( type === 'params' ) obj.params = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* insert */]( obj.params, value );
+            else if ( type === 'queries' ) obj.params = __WEBPACK_IMPORTED_MODULE_0__utils__["a" /* insert */]( obj.queries, value );
             else if ( !this._strict ) obj[ type ] = value;
         }
 
