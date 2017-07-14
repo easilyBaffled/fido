@@ -42,8 +42,8 @@ export const __urlBuilder = {
     },
     addQuery: function( key, value ) {
         const query = ( key && typeof key === 'object' ) ?
-                            Object.keys( key ).map( k => `${k}=${key[ k ]}` ).join( '&' ) // If key is an object value is ignored
-                            : `${key}=${value}`;
+                            objectToQueryString( key ) // If key is an object value is ignored
+                            :  `${key}=${( value && typeof value === 'object' ) ? objectToQueryString( value ) : value }`;
         return this._update( 'queries', query );
     },
     copy: function() {
@@ -83,6 +83,10 @@ export const __urlBuilder = {
         return this._update();
     }*/
 };
+
+function objectToQueryString( obj ) {
+    return Object.keys( obj ).map( k => `${k}=${obj[ k ]}` ).join( '&' )
+}
 
 function proxySet( target, property, value ) {
     target[ property ] = value;
