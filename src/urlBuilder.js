@@ -31,7 +31,7 @@ export const __urlBuilder = {
         if ( type ) {
             if ( !value ) console.warn( type + ' is empty. Did you mean for that? The value is still being added. If you want it to not be added in the future, set _strict to true' );
             if ( type === 'params' ) obj.params = insert( obj.params, value );
-            else if ( type === 'queries' ) obj.params = insert( obj.queries, value );
+            else if ( type === 'queries' ) obj.queries = insert( obj.queries, value );
             else if ( !this._strict ) obj[ type ] = value;
         }
 
