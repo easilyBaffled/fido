@@ -1,4 +1,5 @@
 {
+  "transform": {".*": "./node_modules/babel-jest"},
   "moduleFileExtensions": ["js"],
   "collectCoverageFrom": [
     "src/*.js",
