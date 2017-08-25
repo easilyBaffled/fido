@@ -25,7 +25,7 @@ testGroup( 'setHeader', {
     'expects the given header to be an object': () => {
         try {
             requestBuilder.setHeader( 'CORS IS A PAIN THE ASS' );
-        } catch( e ) {
+        } catch ( e ) {
             expect( e ).toBeInstanceOf( Error );
         }
     }
@@ -42,14 +42,14 @@ testGroup( 'updateHeader', {
     'the first value can be an object and the second will be ignored': () => {
         let rB = requestBuilder
             .setHeader( { key: 'CORS IS A PAIN THE ASS' } )
-            .updateHeader( { 'key2': 'value' }, 'ignoredValue');
-        expect( rB.header ).toEqual( { key: 'CORS IS A PAIN THE ASS', key2: 'value' } )
+            .updateHeader( { 'key2': 'value' }, 'ignoredValue' );
+        expect( rB.header ).toEqual( { key: 'CORS IS A PAIN THE ASS', key2: 'value' } );
     },
     'can be used in place of setHeader': () => {
         let rB = requestBuilder
             .updateHeader( 'key2', 'value' );
         expect( rB.header ).toEqual( { key2: 'value' } );
-    },
+    }
 } );
 
 testGroup( 'setBody', {
@@ -68,7 +68,7 @@ testGroup( 'setBody', {
     'expects the given body to be an object': () => {
         try {
             requestBuilder.setBody( 'CORS IS A PAIN THE ASS' );
-        } catch( e ) {
+        } catch ( e ) {
             expect( e ).toBeInstanceOf( Error );
         }
     }
@@ -85,14 +85,14 @@ testGroup( 'updateBody', {
     'the first value can be an object and the second will be ignored': () => {
         let rB = requestBuilder
             .setBody( { key: 'CORS IS A PAIN THE ASS' } )
-            .updateBody( { 'key2': 'value' }, 'ignoredValue');
-        expect( rB.body ).toEqual( { key: 'CORS IS A PAIN THE ASS', key2: 'value' } )
+            .updateBody( { 'key2': 'value' }, 'ignoredValue' );
+        expect( rB.body ).toEqual( { key: 'CORS IS A PAIN THE ASS', key2: 'value' } );
     },
     'can be used in place of setBody': () => {
         let rB = requestBuilder
             .updateBody( 'key2', 'value' );
         expect( rB.body ).toEqual( { key2: 'value' } );
-    },
+    }
 } );
 
 testGroup( 'get, put, post, delete',
@@ -126,7 +126,7 @@ testGroup( 'verb', {
     'returns a Promise not the Builder': () => {
         const p = requestBuilder.verb( 'GET' );
         console.log( p );
-        expect( p ).toBeInstanceOf( Promise )
+        expect( p ).toBeInstanceOf( Promise );
     }
 } );
 
@@ -145,7 +145,7 @@ testGroup( 'getRequestObj', {
             body: { key: 'value' }
         } );
     }
-} )
+} );
 
 testGroup( 'send', {
     'constructs and sends the request': () => {
@@ -162,7 +162,7 @@ testGroup( 'send', {
     'calls getRequestObj': () => {
         let mockedBuilder = requestBuilder._update();
         mockedBuilder.getRequestObj = jest.fn();
-        mockedBuilder.getRequestObj.mockReturnValueOnce( { url: '', header: '', method: '', body: '' } )
+        mockedBuilder.getRequestObj.mockReturnValueOnce( { url: '', header: '', method: '', body: '' } );
         mockedBuilder.send();
         expect( mockedBuilder.getRequestObj ).toHaveBeenCalled();
     }
