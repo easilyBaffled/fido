@@ -2,7 +2,7 @@ FIDO
 A Fetch module without a good acronym.
 
 [![npm version](https://badge.fury.io/js/fetch-util.svg)](https://badge.fury.io/js/fetch-util)
-[![CircleCI](https://circleci.com/gh/easilyBaffled/fido.svg?style=svg)](https://circleci.com/gh/easilyBaffled/fido)
+[![CircleCI](https://circleci.com/gh/easilyBaffled/fido.svg?style=svg?style=shield)](https://circleci.com/gh/easilyBaffled/fido)
 
 
 [![Coverage Status](https://coveralls.io/repos/github/easilyBaffled/fido/badge.svg?branch=master)](https://coveralls.io/github/easilyBaffled/fido?branch=master)
