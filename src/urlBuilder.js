@@ -62,7 +62,7 @@ export const __urlBuilder = {
     addQuery: function( key, value ) {
         const query = ( key && typeof key === 'object' ) ?
             objectToQueryString( key ) // If key is an object value is ignored
-            :  `${key}=${( value && typeof value === 'object' ) ? objectToQueryString( value ) : value }`;
+            :  `${key}=${( value && typeof value === 'object' && !value.length ) ? objectToQueryString( value ) : value }`;
         return this._update( 'queries', query );
     },
     copy: function() {
@@ -138,7 +138,7 @@ function proxyGet ( target, name, proxy ) {
 
     return function( ...options ) {
         console.warn( `${name} is not a function on this Builder, but it will be treated as 'addQuery( ${name}, ${options} )'. If you do not want this safety net and short cut, set 'strict' to 'true' on this Builder, or import __urlBuilder.` );
-        return proxy.addQuery( name, ...options );
+        return proxy.addQuery( name, options );
     };
 }
 const urlBuilder = new Proxy( __urlBuilder, { set: proxySet, get: proxyGet } );
