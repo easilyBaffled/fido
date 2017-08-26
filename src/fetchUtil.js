@@ -28,7 +28,7 @@ export function extend_fetch_headers( extensions ) {
     //     ...defaultHeaders,
     //     ...extensions
     // };
-    defaultHeaders = Object.assign( {}, defaultHeaders, extensions )
+    defaultHeaders = Object.assign( {}, defaultHeaders, extensions );
 }
 
 export function add_dummy_data_config( config ) {
@@ -79,7 +79,7 @@ export function submit_fetch( url, headers = {}, method = 'GET', body = {} ) {
             .then( parse_resp_JSON )
             .then( res => {
                 const transformedData = data_transformer( url, method, res );
-                return transformedData ? transformedData : res;
+                return transformedData || res;
             } );
 }
 
@@ -111,38 +111,4 @@ function parse_resp_JSON( response ) {
     return response.json();
 }
 
-/**
- * Create and execute the first few steps of Fetch, let's the user specify how to handle the results
- * @param {string} url - This defines the resource that you wish to fetch
- * @param {object} headers - fetch headers
- * @param {Array} filters - Array of objects that will be convereted to a URL query string
- * @return {Promise<U>} - A promise that resolves with an object literal containing the JSON data.
- */
-export function get_json( url, headers = {}, ...filters ) {
-    if ( typeof filters === "string" ) {
-        if ( filters.length === 0 ) {
-            return submit_fetch( url, headers );
-        } else {
-            return submit_fetch( url + format_filters( filters ), headers );
-        }
-    } else {
-        return submit_fetch( url + format_filters( filters ), headers );
-    }
-}
 
-export function post( url, headers, body ) {
-    return submit_fetch( url, headers, 'POST', body );
-}
-
-export function put( url, headers, body ) {
-    return submit_fetch( url, headers, 'PUT', body );
-}
-
-export default function fetch_config( url, headers ) {
-    return {
-        PUT: ( body, id = '' ) => submit_fetch( `${url}/${id}`, headers, 'PUT', body ),
-        POST: ( id, body ) => submit_fetch( `${url}/${id}`, headers, 'POST', JSON.stringify( body ) ),
-        DELETE: ( id ) => submit_fetch( `${url}/${id}`, headers, 'DELETE' ),
-        GET: ( filters ) => submit_fetch( url + ( filters ? format_filters( filters ) : '' ), headers )
-    };
-}

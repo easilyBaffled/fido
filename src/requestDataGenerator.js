@@ -5,7 +5,7 @@ import pathToRegexp from 'path-to-regexp';
  * @param {object} configuration - an object with a key -> value pairing of express-like parameterized routes -> dummy data generator
  * @return {function(*)} - function to be used for matching URLs with the proper dummy data
  */
-export default function configure_data_gen( configuration ) {
+export default function requestDataGenerator( configuration ) {
     /**
      * Match the given URL against express-like parameterized routesand returns dummy data to replicate data that may come from the API
      * @param {string} url - url used to request data from the API
