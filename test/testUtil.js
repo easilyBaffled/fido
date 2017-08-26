@@ -1,3 +1,14 @@
+if (!Object.entries)
+    Object.entries = function( obj ){
+        var ownProps = Object.keys( obj ),
+            i = ownProps.length,
+            resArray = new Array(i); // preallocate the Array
+        while (i--)
+            resArray[i] = [ownProps[i], obj[ownProps[i]]];
+
+        return resArray;
+    };
+
 /**
  * An adapter for Jest's `test` function so it can easily slot in with Object.entries
  * @param {string} description - description text for this test
