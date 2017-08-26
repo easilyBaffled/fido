@@ -136,9 +136,9 @@ function proxyGet ( target, name, proxy ) {
     const value = target[ name ];
     if ( value !== undefined || target._strict ) return value;
 
-    return function( options ) {
+    return function( ...options ) {
         console.warn( `${name} is not a function on this Builder, but it will be treated as 'addQuery( ${name}, ${options} )'. If you do not want this safety net and short cut, set 'strict' to 'true' on this Builder, or import __urlBuilder.` );
-        return proxy.addQuery( name, options );
+        return proxy.addQuery( name, ...options );
     };
 }
 const urlBuilder = new Proxy( __urlBuilder, { set: proxySet, get: proxyGet } );
