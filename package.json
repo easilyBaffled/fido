@@ -9,7 +9,11 @@
     "build": "webpack",
     "deploy": "npm run build && git commit . -m Build && npm version patch && npm publish"
   },
-  "author": "",
+  "author": "Danny Michaelis, easilyBaffled",
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/easilyBaffled/fido.git"
+  },
   "license": "ISC",
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",
