@@ -1,6 +1,6 @@
 {
   "name": "fetch-util",
-  "version": "0.5.13",
+  "version": "0.5.14",
   "description": "",
   "main": "dist/bundle.js",
   "module": "src/index.js",
@@ -10,9 +10,9 @@
     "deploy": "npm run build && git commit . -m Build && npm version patch && npm publish"
   },
   "author": "Danny Michaelis, easilyBaffled",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/easilyBaffled/fido.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/easilyBaffled/fido.git"
   },
   "license": "ISC",
   "dependencies": {
