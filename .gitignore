@@ -1,2 +1,11 @@
+# folders
+.idea
 
-coverage/*
+.eslintrc.json
+wallaby.config.js
+
+# dependencies
+/node_modules
+
+# testing
+/coverage
